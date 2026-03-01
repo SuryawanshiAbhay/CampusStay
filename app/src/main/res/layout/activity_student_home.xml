@@ -4,30 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:gravity="center">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter OTP"
+        android:text="Student Dashboard"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
-
-    <EditText
-        android:id="@+id/etOtp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter 6-digit OTP"
-        android:inputType="number"
-        android:maxLength="6"/>
+        android:layout_marginBottom="30dp"/>
 
     <Button
-        android:id="@+id/btnVerify"
+        android:id="@+id/btnViewHostels"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Verify OTP"
-        android:layout_marginTop="20dp"/>
+        android:text="View Hostels"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Profile"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"/>
 
 </LinearLayout>

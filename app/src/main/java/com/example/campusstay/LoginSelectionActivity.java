@@ -6,37 +6,28 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
+public class LoginSelectionActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    Button btnStudent, btnOwner;
-    FirebaseAuth mAuth;
+    Button btnOwner, btnStudent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login_selection);
 
-        btnStudent = findViewById(R.id.btnStudent);
         btnOwner = findViewById(R.id.btnOwner);
-
-        mAuth = FirebaseAuth.getInstance();
-
-
-
-        btnStudent.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SendOtpActivity.class);
-            intent.putExtra("role", "student");
-            startActivity(intent);
-        });
+        btnStudent = findViewById(R.id.btnStudent);
 
         btnOwner.setOnClickListener(v -> {
             Intent intent = new Intent(this, SendOtpActivity.class);
             intent.putExtra("role", "owner");
             startActivity(intent);
+        });
 
-
+        btnStudent.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SendOtpActivity.class);
+            intent.putExtra("role", "student");
+            startActivity(intent);
         });
     }
 }

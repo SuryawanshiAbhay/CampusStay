@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,41 +14,45 @@
             android:id="@+id/etHostelName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Hostel Name"
-            android:minHeight="48dp" />
+            android:hint="Hostel Name" />
 
         <EditText
             android:id="@+id/etLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:hint="Location"
-            android:minHeight="48dp" />
+            android:layout_marginTop="12dp" />
 
         <EditText
             android:id="@+id/etRent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:hint="Rent"
             android:inputType="number"
-            android:minHeight="48dp" />
+            android:layout_marginTop="12dp" />
 
         <EditText
             android:id="@+id/etRooms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:hint="Available Rooms"
             android:inputType="number"
-            android:minHeight="48dp" />
+            android:layout_marginTop="12dp" />
 
         <Button
-            android:id="@+id/btnSaveHostel"
+            android:id="@+id/btnAddHostel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save Hostel"
-            android:layout_marginTop="20dp"/>
+            android:text="Add Hostel"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_marginTop="8dp"/>
 
     </LinearLayout>
+
 </ScrollView>

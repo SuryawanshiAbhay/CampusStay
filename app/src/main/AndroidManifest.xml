@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Internet required -->
+    <!-- Internet Permission for Firebase -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CampusStay">
 
-        <!-- Launcher -->
+        <!-- Launcher Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -22,13 +22,22 @@
             </intent-filter>
         </activity>
 
-        <!-- Student Flow -->
-        <activity android:name=".StudentLoginActivity"/>
+        <!-- OTP Authentication -->
         <activity android:name=".SendOtpActivity"/>
         <activity android:name=".VerifyOtpActivity"/>
 
-        <!-- Owner Flow -->
+        <!-- Owner Section -->
+        <activity android:name=".OwnerHomeActivity"/>
         <activity android:name=".OwnerAddHostelActivity"/>
+        <activity android:name=".OwnerProfileActivity"/>
+
+        <!-- Student Section -->
+        <activity android:name=".StudentHomeActivity"/>
+        <activity android:name=".StudentProfileActivity"/>
+
+        <!-- Hostel List -->
+        <activity android:name=".HostelListActivity"/>
 
     </application>
+
 </manifest>

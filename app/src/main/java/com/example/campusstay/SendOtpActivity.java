@@ -6,11 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
@@ -19,6 +18,8 @@ public class SendOtpActivity extends AppCompatActivity {
 
     EditText etPhone;
     Button btnSendOtp;
+    FirebaseAuth mAuth;
+    String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,70 +28,49 @@ public class SendOtpActivity extends AppCompatActivity {
 
         etPhone = findViewById(R.id.etPhone);
         btnSendOtp = findViewById(R.id.btnSendOtp);
+        mAuth = FirebaseAuth.getInstance();
+
+        role = getIntent().getStringExtra("role");
 
         btnSendOtp.setOnClickListener(v -> {
+            String inputPhone = etPhone.getText().toString().trim();
 
-            String phone = etPhone.getText().toString().trim();
-
-            // remove spaces if user pasted number
-            phone = phone.replaceAll("\\s", "");
-
-            String fullPhone;
-
-            // if user enters +91XXXXXXXXXX
-            if (phone.startsWith("+91") && phone.length() == 12) {
-                fullPhone = phone;
-            }
-            // if user enters 10 digit number
-            else if (phone.length() == 10) {
-                fullPhone = "+91" + phone;
-            }
-            else {
+            if (inputPhone.length() != 10) {
                 Toast.makeText(this, "Enter valid number", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            sendOtp(fullPhone);
+            final String phone = "+91" + inputPhone;
+
+            PhoneAuthOptions options =
+                    PhoneAuthOptions.newBuilder(mAuth)
+                            .setPhoneNumber(phone)
+                            .setTimeout(60L, TimeUnit.SECONDS)
+                            .setActivity(this)
+                            .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                                @Override
+                                public void onVerificationCompleted(com.google.firebase.auth.PhoneAuthCredential credential) {
+                                }
+
+                                @Override
+                                public void onVerificationFailed(com.google.firebase.FirebaseException e) {
+                                    Toast.makeText(SendOtpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onCodeSent(String verificationId,
+                                                       PhoneAuthProvider.ForceResendingToken token) {
+
+                                    Intent intent = new Intent(SendOtpActivity.this, VerifyOtpActivity.class);
+                                    intent.putExtra("verificationId", verificationId);
+                                    intent.putExtra("phone", phone);
+                                    intent.putExtra("role", role);
+                                    startActivity(intent);
+                                }
+                            })
+                            .build();
+
+            PhoneAuthProvider.verifyPhoneNumber(options);
         });
-    }
-
-    private void sendOtp(String phoneNumber) {
-
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,
-                60,
-                TimeUnit.SECONDS,
-                this,
-
-                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-                    @Override
-                    public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
-                        Toast.makeText(SendOtpActivity.this,
-                                "Auto Verification Completed",
-                                Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onVerificationFailed(@NonNull FirebaseException e) {
-                        Toast.makeText(SendOtpActivity.this,
-                                "Verification Failed: " + e.getMessage(),
-                                Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onCodeSent(@NonNull String verificationId,
-                                           @NonNull PhoneAuthProvider.ForceResendingToken token) {
-
-                        Toast.makeText(SendOtpActivity.this,
-                                "OTP Sent",
-                                Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(SendOtpActivity.this, VerifyOtpActivity.class);
-                        intent.putExtra("verificationId", verificationId);
-                        startActivity(intent);
-                    }
-                }
-        );
     }
 }

@@ -3,22 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center">
-
-    <EditText
-        android:id="@+id/etPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Phone Number"
-        android:inputType="phone"/>
+    android:padding="24dp">
 
     <Button
-        android:id="@+id/btnSendOtp"
+        android:id="@+id/btnOwner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send OTP"
-        android:layout_marginTop="20dp"/>
+        android:text="Login as Owner"/>
+
+    <Button
+        android:id="@+id/btnStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login as Student"
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>
